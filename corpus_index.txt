@@ -1,0 +1,84 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1,
+    "analysis": {
+      "char_filter": {
+        "hyphenFilter": {
+          "type": "mapping",
+          "mappings": [
+            "-=>"
+          ]
+        }
+      },
+      "analyzer": {
+        "hyphen": {
+          "char_filter": [
+            "hyphenFilter"
+          ],
+          "tokenizer": "standard"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "textline": {
+      "properties": {
+        "rawText": {
+          "type": "string",
+          "analyzer": "hyphen"
+        }
+      }
+    }
+  }
+}
+
+
+
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1,
+    "analysis": {
+      "char_filter": {
+        "hyphenFilter": {
+          "type": "mapping",
+          "mappings": [
+            "-=>"
+          ]
+        }
+      },
+      "analyzer": {
+        "hyphen": {
+            "type": "pattern",
+            "pattern": "([\\s.,;:\"<>$+=!\\[\\]\\*—\\?]+)"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "textline": {
+      "properties": {
+        "rawText": {
+          "type": "string",
+          "analyzer": "hyphen"
+        },
+        "pos": {
+          "type": "string",
+          "analyzer": "hyphen"
+        },
+        "lemma": {
+          "type": "string",
+          "analyzer": "hyphen"
+        },
+        "mixed": {
+          "type": "string",
+          "analyzer": "hyphen"
+        }
+      
+      }
+    }
+  }
+}
+
+"pattern": "([\\s.,;:\"<>$+=!\\[\\]\\*]+)"
